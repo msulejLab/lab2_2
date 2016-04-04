@@ -9,6 +9,8 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 public class MoneyTest {
+    private static final double LOWER_VALUE = 50;
+    private static final double HIGHER_VALUE = 100;
 
     @Test
     public void testMultiplyByWithPositiveMultiplier() {
@@ -72,7 +74,6 @@ public class MoneyTest {
         Money result = firstMoney.add(secondMoney);
     }
 
-
     @Test
     public void testSubtractWithPositiveSubtrahend() {
         Money firstMoney = new Money(200);
@@ -109,82 +110,83 @@ public class MoneyTest {
         Money result = firstMoney.subtract(secondMoney);
     }
 
+
     @Test
-    public void moreIsGreaterThanLess() {
-        Money firstMoney = new Money(100);
-        Money secondMoney = new Money(50);
+    public void higherValueIsGreaterThanLowerValue() {
+        Money firstMoney = new Money(HIGHER_VALUE);
+        Money secondMoney = new Money(LOWER_VALUE);
 
         boolean result = firstMoney.greaterThan(secondMoney);
         assertThat(result, is(true));
     }
 
     @Test
-    public void lessIsNotGreaterThanMore() {
-        Money firstMoney = new Money(50);
-        Money secondMoney = new Money(100);
+    public void lowerValueIsNotGreaterThanHigherValue() {
+        Money firstMoney = new Money(LOWER_VALUE);
+        Money secondMoney = new Money(HIGHER_VALUE);
 
         boolean result = firstMoney.greaterThan(secondMoney);
         assertThat(result, is(false));
     }
 
     @Test
-    public void sameIsNotGreaterThanSame() {
-        Money firstMoney = new Money(100);
-        Money secondMoney = new Money(100);
+    public void sameValueIsNotGreaterThanSameValue() {
+        Money firstMoney = new Money(HIGHER_VALUE);
+        Money secondMoney = new Money(HIGHER_VALUE);
 
         boolean result = firstMoney.greaterThan(secondMoney);
         assertThat(result, is(false));
     }
 
     @Test
-    public void lessIsLessThanMore() {
-        Money firstMoney = new Money(50);
-        Money secondMoney = new Money(100);
+    public void lowerValueIsLessThanHigherValue() {
+        Money firstMoney = new Money(LOWER_VALUE);
+        Money secondMoney = new Money(HIGHER_VALUE);
 
         boolean result = firstMoney.lessThan(secondMoney);
         assertThat(result, is(true));
     }
 
     @Test
-    public void moreIsNotLessThanLess() {
-        Money firstMoney = new Money(100);
-        Money secondMoney = new Money(50);
+    public void higherValueIsNotLessThanLowerValue() {
+        Money firstMoney = new Money(HIGHER_VALUE);
+        Money secondMoney = new Money(LOWER_VALUE);
 
         boolean result = firstMoney.lessThan(secondMoney);
         assertThat(result, is(false));
     }
 
     @Test
-    public void sameIsNotLessThanSame() {
-        Money firstMoney = new Money(100);
-        Money secondMoney = new Money(100);
+    public void sameValueIsNotLessThanSameValue() {
+        Money firstMoney = new Money(HIGHER_VALUE);
+        Money secondMoney = new Money(HIGHER_VALUE);
 
         boolean result = firstMoney.lessThan(secondMoney);
         assertThat(result, is(false));
     }
 
     @Test
-    public void lessIsLessOrEqualThanMore() {
-        Money firstMoney = new Money(50);
-        Money secondMoney = new Money(100);
+    public void lowerValueIsLessOrEqualThanHigherValue() {
+        Money firstMoney = new Money(LOWER_VALUE);
+        Money secondMoney = new Money(HIGHER_VALUE);
 
         boolean result = firstMoney.lessOrEquals(secondMoney);
         assertThat(result, is(true));
     }
 
     @Test
-    public void moreIsNotLessOrEqualThanLess() {
-        Money firstMoney = new Money(100);
-        Money secondMoney = new Money(50);
+    public void higherValueIsNotLessOrEqualThanLowerValue() {
+        Money firstMoney = new Money(HIGHER_VALUE);
+        Money secondMoney = new Money(LOWER_VALUE);
 
         boolean result = firstMoney.lessOrEquals(secondMoney);
         assertThat(result, is(false));
     }
 
     @Test
-    public void sameIsLessOrEqualThanSame() {
-        Money firstMoney = new Money(100);
-        Money secondMoney = new Money(100);
+    public void sameValueIsLessOrEqualThanSameValue() {
+        Money firstMoney = new Money(HIGHER_VALUE);
+        Money secondMoney = new Money(HIGHER_VALUE);
 
         boolean result = firstMoney.lessOrEquals(secondMoney);
         assertThat(result, is(true));
