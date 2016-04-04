@@ -71,4 +71,41 @@ public class MoneyTest {
 
         Money result = firstMoney.add(secondMoney);
     }
+
+
+    @Test
+    public void testSubtractWithPositiveSubtrahend() {
+        Money firstMoney = new Money(200);
+        Money secondMoney = new Money(100);
+
+        Money result = firstMoney.subtract(secondMoney);
+        assertThat(result.toString(), is("100,00 " + Money.DEFAULT_CURRENCY));
+    }
+
+
+    @Test
+    public void testSubtractWithNegativeSubtrahend() {
+        Money firstMoney = new Money(50);
+        Money secondMoney = new Money(-120);
+
+        Money result = firstMoney.subtract(secondMoney);
+        assertThat(result.toString(), is("170,00 " + Money.DEFAULT_CURRENCY));
+    }
+
+    @Test
+    public void testSubtractWithZeroSubtrahend() {
+        Money firstMoney = new Money(100);
+        Money secondMoney = new Money(0);
+
+        Money result = firstMoney.subtract(secondMoney);
+        assertThat(result.toString(), is("100,00 " + Money.DEFAULT_CURRENCY));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSubtractWithDifferentCurrency() {
+        Money firstMoney = new Money(50, Currency.getInstance("PLN"));
+        Money secondMoney = new Money(20, Currency.getInstance("CHF"));
+
+        Money result = firstMoney.subtract(secondMoney);
+    }
 }
