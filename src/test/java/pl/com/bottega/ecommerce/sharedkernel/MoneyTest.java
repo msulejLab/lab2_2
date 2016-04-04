@@ -2,6 +2,8 @@ package pl.com.bottega.ecommerce.sharedkernel;
 
 import org.junit.Test;
 
+import java.util.Currency;
+
 import static org.hamcrest.Matchers.is;
 
 import static org.junit.Assert.*;
@@ -33,5 +35,40 @@ public class MoneyTest {
 
         Money result = money.multiplyBy(multiplier);
         assertThat(result.toString(), is("0,00 " + Money.DEFAULT_CURRENCY));
+    }
+
+    @Test
+    public void testAddWithPositiveAddend() {
+        Money firstMoney = new Money(50);
+        Money secondMoney = new Money(100);
+
+        Money result = firstMoney.add(secondMoney);
+        assertThat(result.toString(), is("150,00 " + Money.DEFAULT_CURRENCY));
+    }
+
+    @Test
+    public void testAddWithNegativeAddend() {
+        Money firstMoney = new Money(100);
+        Money secondMoney = new Money(-99);
+
+        Money result = firstMoney.add(secondMoney);
+        assertThat(result.toString(), is("1,00 " + Money.DEFAULT_CURRENCY));
+    }
+
+    @Test
+    public void testAddWithZeroAddend() {
+        Money firstMoney = new Money(100);
+        Money secondMoney = new Money(0);
+
+        Money result = firstMoney.add(secondMoney);
+        assertThat(result.toString(), is("100,00 " + Money.DEFAULT_CURRENCY));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddWithDifferentCurrency() {
+        Money firstMoney = new Money(50, Currency.getInstance("PLN"));
+        Money secondMoney = new Money(20, Currency.getInstance("CHF"));
+
+        Money result = firstMoney.add(secondMoney);
     }
 }
