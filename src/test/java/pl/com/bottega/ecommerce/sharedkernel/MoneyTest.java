@@ -108,4 +108,31 @@ public class MoneyTest {
 
         Money result = firstMoney.subtract(secondMoney);
     }
+
+    @Test
+    public void moreIsGreaterThanLess() {
+        Money firstMoney = new Money(100);
+        Money secondMoney = new Money(50);
+
+        boolean result = firstMoney.greaterThan(secondMoney);
+        assertThat(result, is(true));
+    }
+
+    @Test
+    public void lessIsNotGreaterThanMore() {
+        Money firstMoney = new Money(50);
+        Money secondMoney = new Money(100);
+
+        boolean result = firstMoney.greaterThan(secondMoney);
+        assertThat(result, is(false));
+    }
+
+    @Test
+    public void equalsIsNotGreaterThanEquals() {
+        Money firstMoney = new Money(100);
+        Money secondMoney = new Money(100);
+
+        boolean result = firstMoney.greaterThan(secondMoney);
+        assertThat(result, is(false));
+    }
 }
