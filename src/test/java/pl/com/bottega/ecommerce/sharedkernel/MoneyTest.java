@@ -162,4 +162,31 @@ public class MoneyTest {
         boolean result = firstMoney.lessThan(secondMoney);
         assertThat(result, is(false));
     }
+
+    @Test
+    public void lessIsLessOrEqualThanMore() {
+        Money firstMoney = new Money(50);
+        Money secondMoney = new Money(100);
+
+        boolean result = firstMoney.lessOrEquals(secondMoney);
+        assertThat(result, is(true));
+    }
+
+    @Test
+    public void moreIsNotLessOrEqualThanLess() {
+        Money firstMoney = new Money(100);
+        Money secondMoney = new Money(50);
+
+        boolean result = firstMoney.lessOrEquals(secondMoney);
+        assertThat(result, is(false));
+    }
+
+    @Test
+    public void sameIsLessOrEqualThanSame() {
+        Money firstMoney = new Money(100);
+        Money secondMoney = new Money(100);
+
+        boolean result = firstMoney.lessOrEquals(secondMoney);
+        assertThat(result, is(true));
+    }
 }
